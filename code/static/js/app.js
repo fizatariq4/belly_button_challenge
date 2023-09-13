@@ -91,7 +91,7 @@ function updateBubbleChart(data, selectedSample, chartDiv) {
   Plotly.newPlot(chartDiv, bubbleData, layout);
 }
 
-// display sample metadata 
+// display function for sample metadata 
 function displayMetadata(data, selectedSample) {
   const metadataDiv = d3.select("#sample-metadata");
   metadataDiv.html("");
