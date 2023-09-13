@@ -1,14 +1,13 @@
-const url =
-  "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
+const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
-// Fetch the JSON data and populate the dropdown menu
+// read json into drop down
 document.addEventListener("DOMContentLoaded", function () {
-  const dropdownMenu = d3.select("#selDataset"); // Use #selDataset as the selector
+  const dropdownMenu = d3.select("#selDataset"); 
   const barChartDiv = document.getElementById("bar");
   const bubbleChartDiv = document.getElementById("bubble");
 
   d3.json(url).then(function (data) {
-    // Populate the dropdown menu with sample IDs
+    // put in data names for ids in drop down
     const sampleIds = data.names;
     sampleIds.forEach((sampleId) => {
       dropdownMenu
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .text(sampleId);
     });
 
-    // Event listener for the dropdown menu
+    // event listener for the dropdown menu
     dropdownMenu.on("change", function () {
       const selectedSample = this.value; // Get the selected sample ID
 
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       displayMetadata(data, selectedSample);
     });
 
-    // Initialize the dashboard with the first sample
+    // first sample
     const defaultSample = sampleIds[0];
     updateBarChart(data, defaultSample, barChartDiv);
     updateBubbleChart(data, defaultSample, bubbleChartDiv);
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Function to update the bar chart
+// update bar chart
 function updateBarChart(data, selectedSample, chartDiv) {
   const selectedData = data.samples.find((sample) => sample.id === selectedSample);
 
@@ -62,7 +61,7 @@ function updateBarChart(data, selectedSample, chartDiv) {
   Plotly.newPlot(chartDiv, chartData, layout);
 }
 
-// Function to update the bubble chart
+// update the bubble chart
 function updateBubbleChart(data, selectedSample, chartDiv) {
   const selectedData = data.samples.find((sample) => sample.id === selectedSample);
 
@@ -83,8 +82,8 @@ function updateBubbleChart(data, selectedSample, chartDiv) {
     title: "Bubble Chart for Samples",
     xaxis: { title: "OTU IDs" },
     yaxis: { title: "Sample Values" },
-    height: 600, // Adjust the height here
-    width: 1000, // Adjust the width here
+    height: 600, 
+    width: 1000, 
   };
 
   const bubbleData = [trace];
@@ -92,7 +91,7 @@ function updateBubbleChart(data, selectedSample, chartDiv) {
   Plotly.newPlot(chartDiv, bubbleData, layout);
 }
 
-// Function to display the sample metadata
+// display sample metadata 
 function displayMetadata(data, selectedSample) {
   const metadataDiv = d3.select("#sample-metadata");
   metadataDiv.html("");
