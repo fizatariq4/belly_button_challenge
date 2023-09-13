@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dropdownMenu.on("change", function () {
       const selectedSample = this.value; // Get the selected sample ID
 
-      // Call functions to update all the plots with the selected sample
+      // update all plots
       updateBarChart(data, selectedSample, barChartDiv);
       updateBubbleChart(data, selectedSample, bubbleChartDiv);
       displayMetadata(data, selectedSample);
